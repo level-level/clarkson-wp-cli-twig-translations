@@ -12,5 +12,8 @@
   "require" : {
     "twig/twig":"^1.2",
     "twig/extensions":"^1.3"
-  }
+  },
+  "autoload": {
+      "files": ["clarkson-wp-cli-twig-translations.php"]
+    }
 }
