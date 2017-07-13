@@ -3,7 +3,7 @@
 /*
 Plugin Name: Clarkson WP-CLI Twig Translation
 Plugin URI: https://github.com/level-level/clarkson-wp-cli-twig-translations
-Description: Smart WP-CLI command to cache the Twig templates so they can be read by PoEdit, instead of buying PoEdit Pro :)
+Description: Smart WP-CLI command to cache the Twig templates so they can be read by PoEdit
 Version: 0.1.0
 Author: Level Level
 Author URI: https://level-level.com
