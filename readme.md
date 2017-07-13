@@ -1,7 +1,7 @@
 # Clarkson WP-CLI Twig Translation commando
 
 # What 
-Parses all Twig files in your current themes `templates` directory. 
+Parses all Twig files in your current themes `templates` directory to `.php` files. 
 
 # How 
 

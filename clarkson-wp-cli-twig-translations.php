@@ -7,6 +7,7 @@ Description: Smart WP-CLI command to cache the Twig templates so they can be rea
 Version: 0.1.0
 Author: Level Level
 Author URI: https://level-level.com
+License:     GPL 2.0
 */
 
 namespace Clarkson\WPCLITwigTranslations;
