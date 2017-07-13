@@ -11,11 +11,9 @@ License: GPL 2.0
 */
 
 namespace Clarkson\WPCLITwigTranslations;
-
-if( defined('WP_CLI') && WP_CLI ) {
+if( !defined('WP_CLI') || ! WP_CLI ) {
     return;
 }
-
 class Gettext extends \WP_CLI_Command {
 
     /**
