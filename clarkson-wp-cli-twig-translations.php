@@ -20,11 +20,11 @@ if(defined('WP_CLI') && WP_CLI) {
         public function prepareFiles(){
             $twig_args = array(
                 'debug' => true,
-                'cache' => realpath( get_stylesheet_directory() ) . '/dist/rendered-templates/',
+                'cache' => apply_filters( 'clarkson_twig_translate_cache_path', realpath( get_stylesheet_directory() ) . '/dist/rendered-templates/' ),
                 'auto_reload' => true
             );
 
-            $basedir = realpath( get_stylesheet_directory() . '/templates/' );
+            $basedir = apply_filters( 'clarkson_twig_translate_templates_path', realpath( get_stylesheet_directory() . '/templates/' ) );
             $twig_fs = new \Twig_Loader_Filesystem( $basedir );
             $twig 	 = new \Twig_Environment( $twig_fs, $twig_args );
             $twig->addExtension( new \Clarkson_Core_Twig_Extension()    );
