@@ -2,7 +2,7 @@
   "name": "level-level/clarkson-wp-cli-twig-translations",
   "description": "Smart WP-CLI command to cache the Twig templates so they can be read by PoEdit",
   "type": "library",
-  "license": "GPL 2.0",
+  "license": "GPL-2.0-only",
   "authors": [
     {
       "name": "Level Level"
