@@ -8,6 +8,12 @@ License: GPL 2.0
 */
 
 namespace Clarkson\WPCLITwigTranslations;
+
+use Twig\Extra\Html\HtmlExtension;
+use Twig\Extra\Intl\IntlExtension;
+use Twig\Extra\Markdown\MarkdownExtension;
+use Twig\Extra\String\StringExtension;
+
 if( !defined('WP_CLI') || ! WP_CLI ) {
     return;
 }
@@ -27,15 +33,15 @@ if( ! class_exists( '\Clarkson\WPCLITwigTranslations\Gettext' ) ){
             );
 
             $basedir = realpath( __DIR__ . '/../../../' . $assoc_args['template-dir'] );
-            $twig_fs = new \Twig_Loader_Filesystem( $basedir );
-            $twig 	 = new \Twig_Environment( $twig_fs, $twig_args );
+            $twig_fs = new \Twig\Loader\FilesystemLoader( $basedir );
+            $twig 	 = new \Twig\Environment( $twig_fs, $twig_args );
             $twig->registerUndefinedFunctionCallback(function ($name) {
                 return new \Twig\TwigFunction($name, $name);
             });
-            $twig->addExtension( new \Twig_Extensions_Extension_I18n() );
-            $twig->addExtension( new \Twig_Extensions_Extension_Text() );
-            $twig->addExtension( new \Twig_Extensions_Extension_Array() );
-            $twig->addExtension( new \Twig_Extensions_Extension_Date() );
+            $twig->addExtension( new IntlExtension() );
+            $twig->addExtension( new StringExtension() );
+            $twig->addExtension( new HtmlExtension() );
+            $twig->addExtension( new MarkdownExtension() );
 
             $filelist = $this->getFileList( $basedir );
 
