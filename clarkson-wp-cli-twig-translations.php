@@ -47,7 +47,7 @@ if( ! class_exists( '\Clarkson\WPCLITwigTranslations\Gettext' ) ){
 
             foreach($filelist as $filepath) {
                 $truepath = str_replace( $basedir, '', $filepath );
-                $twig->loadTemplate( $truepath );
+                $twig->load( $truepath );
             }
         }
 
