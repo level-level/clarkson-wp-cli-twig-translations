@@ -17,6 +17,12 @@
     "twig/markdown-extra": "^3.1"
   },
   "autoload": {
+      "psr-4": {
+          "Clarkson\\WPCLITwigTranslations\\": "src/"
+      },
       "files": ["clarkson-wp-cli-twig-translations.php"]
-    }
+    },
+  "require-dev": {
+    "wp-cli/wp-cli": "^2.9"
+  }
 }
