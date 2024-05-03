@@ -23,6 +23,9 @@ class GetText extends WP_CLI_Command {
         $twig->registerUndefinedFunctionCallback(function ($name) {
             return new \Twig\TwigFunction($name, $name);
         });
+        $twig->registerUndefinedFilterCallback(function ($name) {
+            return new \Twig\TwigFilter($name, $name);
+        });
         $twig->addExtension( new IntlExtension() );
         $twig->addExtension( new StringExtension() );
         $twig->addExtension( new HtmlExtension() );
