@@ -2,10 +2,13 @@
 
 namespace Clarkson\WPCLITwigTranslations;
 
+use Twig\Environment;
 use Twig\Extra\Html\HtmlExtension;
 use Twig\Extra\Intl\IntlExtension;
 use Twig\Extra\Markdown\MarkdownExtension;
 use Twig\Extra\String\StringExtension;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
 use WP_CLI;
 use WP_CLI_Command;
 
@@ -18,19 +21,10 @@ class GetText extends WP_CLI_Command {
         );
 
         $basedir = realpath( __DIR__ . '/../../../../' . $assoc_args['template-dir'] );
-        $twig_fs = new \Twig\Loader\FilesystemLoader( $basedir );
-        $twig 	 = new \Twig\Environment( $twig_fs, $twig_args );
-        $twig->registerUndefinedFunctionCallback(function ($name) {
-            return new \Twig\TwigFunction($name, $name);
-        });
-        $twig->registerUndefinedFilterCallback(function ($name) {
-            return new \Twig\TwigFilter($name, $name);
-        });
-        $twig->addExtension( new IntlExtension() );
-        $twig->addExtension( new StringExtension() );
-        $twig->addExtension( new HtmlExtension() );
-        $twig->addExtension( new MarkdownExtension() );
-        $twig->addExtension( new Extension() );
+        
+        $twig = $this->setup_twig( $basedir, $twig_args );
+
+        $twig = $this->add_wildcards( $twig );
 
         $filelist = $this->getFileList( $basedir );
 
@@ -50,5 +44,36 @@ class GetText extends WP_CLI_Command {
         }
         $filelist = array_merge( $filelist, glob( realpath( $dir ) . '/*.twig' ) );
         return $filelist;
+    }
+
+    /**
+     * @param $twig_args array<string, mixed> Twig environment arguments
+     */
+    private function setup_twig( string $basedir, array $twig_args ): Environment{
+        $twig_fs = new \Twig\Loader\FilesystemLoader( $basedir );
+        $twig 	 = new \Twig\Environment( $twig_fs, $twig_args );
+        $twig->addExtension( new IntlExtension() );
+        $twig->addExtension( new StringExtension() );
+        $twig->addExtension( new HtmlExtension() );
+        $twig->addExtension( new MarkdownExtension() );
+        return $twig;
+    }
+
+    /**
+     * Add wildcard functions and filters so unrecognized functions and filters are available in translations
+     * 
+     * @see https://github.com/twigphp/Twig/blob/v3.12.0/CHANGELOG
+     */
+    private function add_wildcards( Environment $twig ): Environment{
+        $wildcard_function = new TwigFunction( '*', function ( $args ) {
+            return $args;
+        } );
+        $twig->addFunction( $wildcard_function );
+
+        $wildcard_filter = new TwigFilter( '*', function ( $args ) {
+            return $args;
+        } );
+        $twig->addFilter( $wildcard_filter );
+        return $twig;
     }
 }
