@@ -14,6 +14,11 @@ use WP_CLI_Command;
 
 class GetText extends WP_CLI_Command {
     public function __invoke( $args, $assoc_args ) {
+
+        if( !function_exists( '_x' ) ) {
+            require_once( __DIR__ . '/../wordpress-stubs.php' );
+        }
+
         $twig_args = array(
             'debug' => true,
             'cache' => __DIR__ . '/../../../../' . $assoc_args['output-dir'] ,
