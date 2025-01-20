@@ -65,20 +65,21 @@ class GetText extends WP_CLI_Command {
     }
 
     /**
-     * Add wildcard functions and filters so unrecognized functions and filters are available in translations
+     * Add unregistered function callbacks for when a function does not exist
+     * on runtime of the Twig template.
+     * 
+     * The callback of the twig function is an empty function, as providing the
+     * original unexisting function would cause a fatal error.
      * 
      * @see https://github.com/twigphp/Twig/blob/v3.12.0/CHANGELOG
      */
     private function add_wildcards( Environment $twig ): Environment{
-        $wildcard_function = new TwigFunction( '*', function ( $args ) {
-            return $args;
-        } );
-        $twig->addFunction( $wildcard_function );
-
-        $wildcard_filter = new TwigFilter( '*', function ( $args ) {
-            return $args;
-        } );
-        $twig->addFilter( $wildcard_filter );
+        $twig->registerUndefinedFunctionCallback(function ($name) {
+            return new TwigFunction($name, function () {});
+        });
+        $twig->registerUndefinedFilterCallback(function ($name) {
+            return new TwigFilter($name, function () {});
+        });
         return $twig;
     }
 }
