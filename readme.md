@@ -1,5 +1,19 @@
 # Clarkson WP-CLI Twig Translation commando
 
+## ⚠️ Abandoned
+
+This package is abandoned due to incompatibility with Twig version 3.12+.
+You may use `timber/wp-i18n-twig` instead.
+
+### Replacement instructions
+
+1. `composer remove level-level/clarkson-wp-cli-twig-translations`
+2. `composer require timber/wp-i18n-twig`
+3. If in your composer.json file you have commands set up to run this package, remove every line that starts with `wp clarkson-twig-translations`
+4. If in your composer.json file you have commands set up to run the WP-CLI`wp i18n make-pot` command, change the `wp` prefix to `./vendor/wp-cli/wp-cli/bin/wp`
+5. `composer update --lock`
+
+
 ## What 
 Parses all Twig files in your current themes `templates` directory to `.php` files. 
 

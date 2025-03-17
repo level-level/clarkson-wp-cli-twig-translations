@@ -3,6 +3,7 @@
   "description": "Smart WP-CLI command to cache the Twig templates so they can be read by PoEdit",
   "type": "library",
   "license": "GPL-2.0-only",
+  "abandoned": "timber/wp-i18n-twig",
   "authors": [
     {
       "name": "Level Level"
