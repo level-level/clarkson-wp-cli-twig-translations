@@ -13,7 +13,6 @@ You may use `timber/wp-i18n-twig` instead.
 4. If in your composer.json file you have commands set up to run the WP-CLI`wp i18n make-pot` command, change the `wp` prefix to `./vendor/wp-cli/wp-cli/bin/wp`
 5. `composer update --lock`
 
-
 ## What 
 Parses all Twig files in your current themes `templates` directory to `.php` files. 
 
